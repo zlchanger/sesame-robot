@@ -1,21 +1,21 @@
-# CAD Files
+# CAD 文件
 
-3D CAD models for the Sesame Robot Project. Files are formatted in STEP format and F360 format.
+Sesame Robot 项目的 3D CAD 模型。文件格式为 STEP 和 F360。
 
-Looking for STLs for 3D printing? See [printing](../printing/README.md).
+想要 3D 打印用的 STL 文件？请查看[打印说明](../printing/README.md)。
 
 >[!CAUTION]
-> Parametric drawings and tools made in the original design files may not properly translate to your system. You may need to re-design certain components if you are making significant size changes.
+> 原始设计文件中的参数化图纸和工具可能无法正确转换到您的系统。如果您要进行较大的尺寸改动，可能需要重新设计部分组件。
 
-## Editing the CAD with Free Tools
+## 使用免费工具编辑 CAD
 
-You do not need a paid CAD suite to remix Sesame’s parts. A few practical workflows:
+您不需要付费的 CAD 套件就能对 Sesame 零件进行二次创作。以下是几个实用的工作流程：
 
-1. **Fusion 360 personal license** – Autodesk offers a free hobbyist tier that can open the native `.f3d` files. Enable the *Design History* timeline to see how assemblies were built before changing dimensions.
-2. **FreeCAD for STEP tweaks** – All parts are exported as `.step`, so you can import them into FreeCAD, adjust sketches, and re-export STL/STEP files without losing references. Use the *Part Design* workbench for parametric edits.
-3. **Onshape education account** – Onshape’s free plan lets you upload the STEP files and edit directly in-browser. Great for Chromebook users or when collaborating in real time.
-4. **Meshmixer/Blender for quick mods** – If you just need to shave openings or add text, import the STL into Meshmixer or Blender, make the change, and re-export. This is faster for cosmetic tweaks, but stick with the parametric source for anything dimension-critical.
+1. **Fusion 360 个人许可** – Autodesk 提供免费的个人爱好者版，可以打开原生 `.f3d` 文件。在修改尺寸之前，先开启*设计历史*时间线了解装配体是如何构建的。
+2. **FreeCAD 用于 STEP 调整** – 所有零件已导出为 `.step` 格式，您可以导入 FreeCAD、调整草图并重新导出 STL/STEP 文件，不会丢失参考关系。使用*零件设计*工作台进行参数化编辑。
+3. **Onshape 教育账户** – Onshape 的免费计划允许您上传 STEP 文件并直接在浏览器中编辑。非常适合 Chromebook 用户或需要实时协作的场景。
+4. **Meshmixer/Blender 用于快速修改** – 如果您只需要切除开口或添加文字，将 STL 导入 Meshmixer 或 Blender，完成修改后重新导出即可。这对表面改动来说更快，但对于尺寸关键的修改，还是应使用参数化源文件。
 
 > [!TIP]
-> Keep the original STEP/ Fusion file untouched and branch your edits into a copy. That way you can always rebase onto the upstream design if new hardware revisions ship.
+> 保留原始 STEP/Fusion 文件不做修改，将您的编辑内容分支到副本中。这样当新的硬件版本发布时，您始终可以基于上游设计重新开始。
 

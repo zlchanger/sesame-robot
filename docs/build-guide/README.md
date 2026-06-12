@@ -1,19 +1,19 @@
-# Build Guide
+# 构建指南
 
-Complete build guide for the Sesame Robot.
+Sesame Robot 的完整构建指南。
 
-Use this walkthrough alongside the BOM, wiring guide, and printing notes to stay organized. The table below previews each phase, its goal, and the doc to reference if you get stuck.
+配合 BOM、接线指南和打印说明使用本教程，保持有序推进。下表概括了每个阶段及其目标，以及在遇到困难时可参考的文档。
 
-| Phase                     | Goal                                  | Est. Time     | Key References                                                                                 |
+| 阶段 | 目标 | 预计耗时 | 关键参考资料 |
 | ------------------------- | ------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------- |
-| 1. Gather parts           | Print plastics and source electronics | 1–2 sessions | [hardware/bom](../../hardware/bom/README.md), [hardware/printing](../../hardware/printing/README.md) |
-| 2. Electronics & wiring   | Build ~90% of the harness             | 1 session     | [docs/wiring-guide](../wiring-guide/README.md)                                                    |
-| 3. Hardware pre-assembly  | Prep joints, feet, top cover          | 1 session     | This guide (Phase 3)                                                                           |
-| 4. Hardware main assembly | Mount motors + electronics            | 1–2 sessions | This guide (Phase 4)                                                                           |
-| 5. Calibrate & finish     | Flash tester, align joints, close up  | 1 session     | Firmware README + remaining sections                                                           |
+| 1. 收集零件 | 打印塑料件并采购电子元件 | 1–2 个时段 | [hardware/bom](../../hardware/bom/README.md)、[hardware/printing](../../hardware/printing/README.md) |
+| 2. 电子元件与接线 | 完成约 90% 的线束制作 | 1 个时段 | [docs/wiring-guide](../wiring-guide/README.md) |
+| 3. 硬件预组装 | 准备关节、脚部、顶盖 | 1 个时段 | 本指南（阶段 3） |
+| 4. 硬件主组装 | 安装电机和电子元件 | 1–2 个时段 | 本指南（阶段 4） |
+| 5. 校准与收尾 | 刷入测试固件、校准关节、合盖 | 1 个时段 | 固件 README + 后续章节 |
 
 > [!TIP]
-> Treat each phase like a milestone. Snap progress photos and mark issues before moving on so troubleshooting later is painless.
+> 将每个阶段视为一个里程碑。拍摄进度照片，在进入下一阶段前标记各类问题，这样后续的故障排查会轻松得多。
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=NIgoQVQF_Ng">
@@ -21,257 +21,257 @@ Use this walkthrough alongside the BOM, wiring guide, and printing notes to stay
   </a>
 </p>
 
-## Phase 1: Gathering all the parts.
+## 阶段 1：收集所有零件
 
-**Goal:** Print the full shell set and collect every electronic, connector, and fastener before any soldering starts.
+**目标：** 打印全套外壳零件，在开始焊接前收集所有电子元件、连接器和紧固件。
 
-**You’ll need:**
+**需要准备：**
 
-- [hardware/bom](../../hardware/bom/README.md) for electronics, power gear, and Amazon search links.
-- [hardware/printing](../../hardware/printing/README.md) for STL names, orientations, and support notes.
+- [hardware/bom](../../hardware/bom/README.md) 用于电子元件、电源设备和 Amazon 搜索链接。
+- [hardware/printing](../../hardware/printing/README.md) 用于 STL 名称、打印方向和支撑说明。
 
-There are 11 printed parts (internal frame, top/bottom covers, joints R1–R4/L1–L4) plus 6–8 main electronic components depending on the wiring approach.
+共有 11 个打印零件（内部框架、顶盖/底盖、关节 R1–R4/L1–L4），外加 6–8 个主要电子元件（取决于接线方案）。
 
-Here's what a complete set looks like:
+以下是完整零件套装的样子：
 
 <img src="assets/all-hardware.png" alt="all-hardware" width="70%">
 
-**Phase 1 checklist**
+**阶段 1 检查清单**
 
-- [ ] All plastic parts printed, and cleaned up.
-- [ ] MG90 servos tested quickly on a servo tester or Arduino to catch DOA units.
-- [ ] Power plan decided (USB-C PD vs. battery + buck) and matching connectors sourced (2× 14500 Li-ion cells in a 2× AAA holder fit the stock battery cavity).
-- [ ] Consumables stocked: solder, flux, heat-shrink, zip ties, M2 hardware.
+- [ ] 所有塑料零件已打印并清理完毕。
+- [ ] MG90 舵机已通过舵机测试仪或 Arduino 快速测试，排除到手即坏的单元。
+- [ ] 供电方案已确定（USB-C PD vs. 电池 + 降压转换器）并已采购匹配的连接器（2 节 14500 锂离子电池放入 2× AAA 电池仓可适配标准电池仓）。
+- [ ] 耗材已备齐：焊锡、助焊剂、热缩管、扎带、M2 螺丝。
 
-## Phase 2: Electronics and Wiring
+## 阶段 2：电子元件与接线
 
-**Goal:** Build 90% of the harness on the bench so the frame install is quick.
+**目标：** 在工作台上完成 90% 的线束制作，以便快速安装到框架中。
 
-1. Open the [wiring guide](../wiring-guide/README.md) and pick the section that matches your build (S2 Mini hand-wired, Distro Board V3/V2, or Distro Board V1 legacy).
-2. Lay out every connector in the order shown on the wiring diagram before soldering; this keeps the data lines from getting crossed.
-3. Tin and solder the rails/buck converter first, then route signal wires. Leave generous length for the motors that terminate near the hips.
-4. This is optional but you can also label each servo lead (S0–S7) using tape flags as soon as it is soldered. Future you will thank you.
+1. 打开[接线指南](../wiring-guide/README.md)，选择与您的构建方案（S2 Mini 手工接线、Distro Board V3/V2 或 Distro Board V1 旧版）匹配的章节。
+2. 在焊接前按照接线图所示顺序摆放每个连接器；这可防止数据线交叉接错。
+3. 先镀锡并焊接电源导轨/降压转换器，然后再布置信号线。为连接到髋部附近的电机留出足够的线长。
+4. 尽快在焊好后用标签旗标（S0–S7）标注每根舵机引线（此步可选但强烈建议）。未来的您会感谢今天的自己。
 
 > [!WARNING]
-> Stop before permanently wiring the power switch or OLED. Those final joints happen after the electronics are seated in the frame so you can dial the cable length exactly.
+> 在永久焊接电源开关或 OLED 之前停下。这些最终的连接应在电子元件装入框架之后进行，以便精确调整线缆长度。
 
-**Phase 2 checklist**
+**阶段 2 检查清单**
 
-- [ ] Harness built per your wiring diagram with all joints strain-relieved.
-- [ ] Buck converter trimmed to 5.1 V output and shrink-wrapped.
-- [ ] Servo leads labeled and loosely bundled by destination.
-- [ ] Power switch and OLED leads pre-cut but still un-soldered.
+- [ ] 按照接线图完成线束制作，所有连接点均已完成应力释放。
+- [ ] 降压转换器已调整至 5.1V 输出并已套上热缩管。
+- [ ] 舵机引线已标注并按目标位置松散捆扎。
+- [ ] 电源开关和 OLED 引线已预剪但尚未焊接。
 
-## Phase 3: Hardware Pre-Assembly
+## 阶段 3：硬件预组装
 
-### Hip Joints
+### 髋关节
 
-**Goal:** Pre-load the four hip joints (R1, R2, L1, L2) with one-sided servo horns so installation is tool-free later.
+**目标：** 将四个髋关节（R1、R2、L1、L2）预装单侧舵机臂，以便后续无需工具即可安装。
 
-1. Lay out the four hip joint parts. Find the one-sided servo horns from the servo motor bags (ignore the included extra screws).
-2. Notice the servo horn has a taller side and a shorter side. Press the shorter side into the hip joint. There should be just enough clearance to press this piece in flush.
-3. While holding the horn flat, drive an M2 × 5 mm self-threading screw (the ones with a larger gap between thread spikes) through the second hole in the horn and into the plastic until secure.
+1. 摆放四个髋关节零件。从舵机包装袋中取出单侧舵机臂（忽略附带的多余螺丝）。
+2. 注意舵机臂有较高的一侧和较矮的一侧。将较矮的一侧压入髋关节。应该刚好有足够的间隙将此零件齐平压入。
+3. 按住舵机臂使其保持平整，用一个 M2 × 5 mm 自攻螺丝（螺纹间距较大的那种）穿过舵机臂的第二个孔旋入塑料中，直至固定牢固。
 
 <img src="assets/joint-horn-install.png" alt="install-horn" width="70%">
 
 > [!TIP]
-> Do not over-tighten self-threading screws. Since the threads are plastic, over-tightening will permanently damage the hole.
+> 不要过度拧紧自攻螺丝。由于螺纹是塑料的，过度拧紧会永久损坏螺孔。
 
-Repeat for all four hip joints:
+对全部四个髋关节重复此操作：
 
 <img src="assets/femur-joints.png" alt="hip-joints" width="70%">
 
 > [!IMPORTANT]
-> Do **not** mount these joints on the servos yet. Calibration requires every motor shaft to spin freely.
+> 现在还**不要**将这些关节安装到舵机上。校准需要每个电机轴都能自由旋转。
 
 <img src="assets/dont-mount.png" alt="dont-mount" width="70%">
 
-### Leg Joints
+### 腿部关节
 
-Slide each leg shell over its dedicated motor before the frame install. Use the built-in gap to route wires without pinching them.
+在安装框架之前，将每个腿部外壳滑到对应的电机上。利用内置的间隙布线，避免夹到导线。
 
 <img src="assets/servo-install-leg.png" alt="servo-install-leg" width="70%">
 
-- Feed the motor wires through the side slot.
-- Push the motor into the side of the leg piece that has holes in it. Make sure the motor shaft is at the very top.
-- Confirm the motor sits flush and use self-threading screws to permanently affix the motors into the leg pieces.
+- 将电机线穿过侧面槽口。
+- 将电机推入腿部零件上有孔的一侧。确保电机轴位于最顶端。
+- 确认电机齐平安装，然后使用自攻螺丝将电机永久固定在腿部零件中。
 
-Repeat for the remaining legs.
+对剩下的腿部重复此操作。
 
 <img src="assets/foot-joints.png" alt="leg-joints" width="70%">
 
-### Top Cover & Soldering
+### 顶盖与焊接
 
-The next step is loading the OLED and power switch into the top cover. At this stage, we also do the minimal soldering required for the build.
+下一步是将 OLED 和电源开关装入顶盖。在此阶段，我们还需要完成构建所需的最少量焊接工作。
 
-1. **Power Switch:** Press the battery switch firmly into the back slot of the top cover. DO NOT connect the wires yet.
+1. **电源开关：** 将电池开关用力按入顶盖的后部槽位。现在先不要连接导线。
 
 <img src="assets/switch-insert.png" alt="insert-rocker-switch" width="70%">
 
-2. **OLED Display:** Apply a small amount of solder to the pin headers on the display (tinning). Using the pre-crimped JST connector wires, match the wires to their respective marks on the display and solder them.
+2. **OLED 显示屏：** 在显示屏的排针上涂少量焊锡（镀锡）。使用预压接的 JST 连接器线，将导线匹配到显示屏上对应的标记并焊接。
 
 <img src="assets/display-soldering.png" alt="display-soldering" width="70%">
 
-3. **Battery Connectors (Main Board):** Remove sheathing on the ends of the battery connector wires, tin them, and solder them to the battery pads on the main board in an L-shape pointing upwards. Make sure they do not go over the edge of the board, or the top cover won't fit.
+3. **电池连接器（主板）：** 剥除电池连接器线端的绝缘层，镀锡，然后以 L 形朝上的方向将它们焊接到主板上的电池焊盘。确保它们不超过电路板边缘，否则顶盖将无法合上。
 
 <img src="assets/battery-connector-solder.png" alt="battery-connector-solder" width="70%">
 
-4. **Install Display:** Push the wired OLED display gently into its slot inside the top cover. Insert self-threading screws into the small screw holes beside the display to clamp it permanently in place.
+4. **安装显示屏：** 将已接线的 OLED 显示屏轻轻推入顶盖内部的槽位。在显示屏旁边的小螺丝孔中旋入自攻螺丝，将其永久固定在位。
 
 <img src="assets/insert-display-enclosed.png" alt="securing-display" width="70%">
 
-**Phase 3 checklist**
+**阶段 3 检查清单**
 
-- [ ] Hip joints pre-loaded with servo horns, not yet attached to motors.
-- [ ] Leg pieces installed on every motor.
-- [ ] Power switch and OLED display installed in the top cover.
-- [ ] Battery connectors soldered to the main board.
+- [ ] 髋关节已预装舵机臂，尚未连接到电机上。
+- [ ] 腿部零件已安装在每个电机上。
+- [ ] 电源开关和 OLED 显示屏已安装在顶盖中。
+- [ ] 电池连接器已焊接到主板上。
 
-## Phase 4: Hardware Main Assembly
+## 阶段 4：硬件主组装
 
-**Goal:** Seat the frame motors, route wiring, and secure the electronics stack so the robot is ready for calibration.
+**目标：** 安装框架电机、布线，并固定电子元件堆叠，使机器人准备好进行校准。
 
-1. **Battery Holder:** Insert the battery holder into the back of the internal frame piece. Route the red and black wires up the slot.
-2. **Motor Installation:** While holding the battery wires in place, insert the four remaining side motors. The motor shaft should be facing towards the outside of the internal frame.
+1. **电池仓：** 将电池仓插入内部框架零件的后部。将红黑导线沿槽口向上引出。
+2. **电机安装：** 在按住电池导线的同时，插入剩下的四个侧面电机。电机轴应朝向内部框架的外侧。
 
-- Insert motors at an angle and press them the rest of the way. Make sure not to pinch any wires at the bottom.
+- 将电机以一定角度插入，然后压入到位。确保不要夹到底部的任何导线。
 
-3. **Secure Motors:** Use self-threading screws to permanently affix all four side motors to the frame.
+3. **固定电机：** 使用自攻螺丝将全部四个侧面电机永久固定到框架上。
 
 <img src="assets/insert-frame.png" alt="insert-motors" width="70%">
 
 <img src="assets/rotate-motor.png" alt="rotate-motor" width="70%">
 
-Make sure the motor shafts are closest to the outer edge of the frame.
+确保电机轴最靠近框架外侧边缘。
 
 <img src="assets/install-frame-motors.png" alt="complete-motors" width="70%">
 
-## Installing the Main Electronics
+## 安装主电子元件
 
-Before dropping hardware in, trim or bundle any stray wires so nothing can flop into the servo gears and double-check that every connection exits upward.
+在放入硬件之前，修剪或捆扎任何散线，确保没有导线能飘入舵机齿轮中，并仔细检查每个连接是否朝上引出。
 
-1. Pre-route any long wires upward so they naturally hug the future top cover.
-2. Lower the electronics harness into the cavity while keeping the USB port toward the rear.
-3. **S2 Mini build:** Screw the controller (and optional protoboard) directly into the frame using the provided mounting holes. If you built a small protoboard backplane, use the spare holes in the internal frame to secure it so the servo plugs are easy to reach later.
+1. 将较长的导线预先向上方引导，使其自然地贴近未来的顶盖。
+2. 将电子元件线束放入腔体中，同时保持 USB 端口朝后。
+3. **S2 Mini 方案：** 使用提供的安装孔将控制器（以及可选的万用板）直接拧入框架。如果您搭建了小型万用板背板，利用内部框架中的备用孔将其固定，以便后续方便插拔舵机插头。
 
 <img src="assets/secure-electronics.png" alt="s2-secure-electronics" width="70%">
 
-4. **Distro Board V1 build (Legacy):** Install four M2.5 × 5 mm male-female standoffs to raise the Sesame Distro Board V1 so it clears the ESP32 DevKit. Then secure the assembly using the top screws.
+4. **Distro Board V1 方案（旧版）：** 安装四个 M2.5 × 5 mm 公母螺柱以抬高 Sesame Distro Board V1，使其离开 ESP32 DevKit。然后使用顶部螺丝固定整个组件。
 
 <img src="assets/secure-distro-board.png" alt="secure-distro-board" width="70%">
 
-5. **Distro Board V3/V2 build (Build Kits):** Mount by gently bringing cables towards the center nicely so that the main board can sit properly. Attach the main board to the internal frame. It has two mounting holes in the corner that you attach using self-threading screws.
+5. **Distro Board V3/V2 方案（构建套件）：** 将线缆向中心整理整齐以便主板能正确放置，然后将主板安装到内部框架上。主板角落有两个安装孔，使用自攻螺丝固定。
 
 <img src="assets/secure-distro-boardv2.png" alt="secure-distro-boardv2" width="70%">
 
 > [!TIP]
-> Notch = front. USB port = back. Use these two cues any time the orientation feels ambiguous.
+> 缺口 = 前方。USB 端口 = 后方。当方向不确定时，用这两个线索来判断。
 
-## Calibrating & Running the Testing Firmware
+## 校准并运行测试固件
 
-**Goal:** Teach the controller where each motor sits so the walking poses land correctly.
+**目标：** 让控制器了解每个电机的位置，以便行走姿态能正确执行。
 
 > [!CAUTION]
-> Never run calibration with joints attached. A misaligned horn can stall or strip a servo instantly. All motor shafts should be free spinning at this point.
+> 切勿在安装关节的情况下进行校准。错位的舵机臂可能瞬间堵转或损坏舵机。此时所有电机轴应处于自由旋转状态。
 
-**For S2 Mini and Distro Board V1 (Legacy) Builds:**
+**适用于 S2 Mini 和 Distro Board V1（旧版）方案：**
 
-1. Inspect the harness to ensure no bare conductors can short during testing. Add heat-shrink or tape where needed.
-2. Connect a reliable USB-C cable and flash `sesame-motor-tester.ino` from the [debugging-firmware](../../firmware/debugging-firmware/) folder using Arduino IDE. If you have never flashed an ESP32 before, pause here and follow a quick tutorial so you are comfortable resetting/entering boot mode.
-3. Open the serial monitor. You should see the tester menu.
-4. Command all motors to 90°. Starting from Motor 0, plug its connector into the appropriate header. The servo should immediately whirr into the 90° position. Repeat for Motors 1–7. Skip to Step 4 below.
+1. 检查线束，确保在测试期间没有裸导体可能短路。必要时添加热缩管或胶带。
+2. 连接可靠的 USB-C 线缆，使用 Arduino IDE 从 [debugging-firmware](../../firmware/debugging-firmware/) 文件夹中刷入 `sesame-motor-tester.ino`。如果您从未给 ESP32 刷写过固件，请先暂停并观看快速教程，熟悉复位/进入引导模式的操作。
+3. 打开串口监视器。您应该看到测试菜单。
+4. 将所有电机指令发送到 90°。从电机 0 开始，将其连接器插入对应的排针插座。舵机应立即转动到 90° 位置并保持。对电机 1–7 重复此操作。然后跳到下方第 4 步。
 
-**For Distro Board V3/V2 (Build Kits):**
-If you are using a V3 or V2 Board from a Build Kit, it comes **pre-flashed** with the Sesame firmware! There is no need to plug into a computer and use Arduino IDE to flash firmware.
+**适用于 Distro Board V3/V2（构建套件）：**
+如果您使用的是构建套件中的 V3 或 V2 板，它已**预刷**了 Sesame 固件！无需连接电脑和使用 Arduino IDE 刷写固件。
 
-1. **Power Up:** Plug the board into a strong USB power supply (fast chargers for phones or laptop chargers work great). Note: If you are using the V2 Distro board, it currently has instabilities with the battery system and won't work on batteries, you must plug via USB-C.
-2. **Connect to Portal:** Check the Wi-Fi networks on your phone or computer. The Sesame board will create an access point. Connect to it to open the controller portal. (If on desktop and the portal doesn't show, go to `sesame-root.local` in your browser. Mobile is recommended.)
-3. **Initialize PWM:** Tap the "Standby" button in the portal to initialize the PWM channels. The moment you plug a motor in, it will go to its correct active position.
+1. **通电：** 将电路板插入强劲的 USB 电源（手机快充充电器或笔记本电脑充电器效果很好）。注意：如果您使用的是 V2 Distro 板，其电池系统目前存在不稳定性，无法使用电池工作，必须通过 USB-C 供电。
+2. **连接控制面板：** 检查手机或电脑上的 Wi-Fi 网络。Sesame 板将创建一个接入点。连接到它以打开控制面板。（如果您在桌面上看不到控制面板，在浏览器中访问 `sesame-root.local`。推荐使用手机。）
+3. **初始化 PWM：** 点击控制面板中的"Standby"按钮以初始化 PWM 通道。一旦您插入电机，它将立即转到正确的工作位置。
 
-**General instructions continuing:**
+**通用后续步骤：**
 
-4. **Refer to Diagram:** Use the diagram below to associate motor numbers with their physical position. Ensure the frames are roughly oriented correctly.
+4. **参考图表：** 使用下方的图表将电机编号与其物理位置对应起来。确保框架大致方向正确。
 
 <img src="assets/sesame-angle-guide.png" alt="angle-guide" width="100%">
 
-5. **Plug Motors In:** Starting with Motor 0, plug the connector into the corresponding board header.
-   - **Crucial:** Ensure the brown wire aligns with the ground rail! Upon plugging it in, you should hear it whir into life and hold position.
-   - Repeat for all 8 motors.
+5. **插入电机：** 从电机 0 开始，将连接器插入对应的板载排针插座。
+   - **关键：** 确保棕色线与地线导轨对齐！插入后，您应听到电机转动并保持在位。
+   - 对所有 8 个电机重复此操作。
 
 > [!TIP]
-> 99% of the time, if your motor is moving in the wrong direction, crashing, or being sporadic, the motor is plugged into the wrong slot. Check your wiring!
+> 99% 的情况下，如果您的电机转动方向错误、撞到东西或行为异常，是因为电机插错了槽位。检查您的接线！
 
-## Attaching Hip & Leg Joints
+## 安装髋关节和腿部关节
 
-Now we attach the joints while the motors are turned on and holding their "Stand" position.
+现在我们在电机通电并保持在"站立"位置的状态下安装关节。
 
-1. **Hip Joints:** Select the matching hip joint for your motor. While in "Stand" mode, push the hip joint onto the motor shaft at a 45-degree angle.
-2. **Test Angles:** Tap "Rest" in the portal. The hip joint should move perfectly parallel to the body. Tap "Stand" again, and it should go back to 45°. Alternate this to ensure it's placed correctly.
-3. **Fasten Hip:** If it looks good, fasten the hip joint to the motor using an M2.5 machine screw through the main hole into the motor shaft. Gently tighten (don't over-torque against the motor as this may cause a brownout).
-4. **Legs:** Repeat the same process with the leg joints. Check against "Rest" and "Stand", ensure nothing collides, and then affix using screws.
+1. **髋关节：** 选择与电机匹配的髋关节。在"Stand"模式下，将髋关节以 45 度角推到电机轴上。
+2. **测试角度：** 点击控制面板中的"Rest"。髋关节应移动到与身体完全平行的位置。再次点击"Stand"，它应该回到 45°。反复切换以确保位置正确。
+3. **固定髋关节：** 如果位置正确，使用 M2.5 机牙螺丝穿过主孔旋入电机轴以固定髋关节。轻轻拧紧（不要对电机施加过大扭矩，这可能导致电压骤降）。
+4. **腿部：** 对腿部关节重复相同的过程。对照"Rest"和"Stand"检查，确保没有任何碰撞，然后使用螺丝固定。
 
 <img src="assets/reference-configuration.png" alt="reference-configuration" width="70%">
 
-## Final Wiring and Top Cover
+## 最终接线和顶盖
 
-Now to clean up the robot and secure everything.
+现在整理机器人并固定所有部件。
 
-1. **Battery Connections:** Insert the battery wires into the screw terminal on the board and use a flathead screwdriver to tighten them securely.
-2. **Wire Routing:** Flip the robot over. There are channels for all the wires on the underside. Securely press all of the wires into these channels.
-3. **Bundling:** Separate the wires gently into two groups (left and right). Wrap a zip tie around each bundle, fold it once, and tighten the zip tie to create a tight bundle. This helps the top cover fit seamlessly.
+1. **电池连接：** 将电池导线插入板上的螺丝端子，使用一字螺丝刀拧紧。
+2. **走线：** 翻转机器人。底部有用于所有导线的线槽。将全部导线牢固地压入这些线槽中。
+3. **捆扎：** 将导线轻轻分成两组（左和右）。用扎带缠绕每组导线，折叠一次，然后收紧扎带形成紧凑的线束。这有助于顶盖无缝贴合。
 
 <img src="assets/wire-routing.png" alt="wire-routing" width="70%">
 
 <img src="assets/zip-tie-bundles.png" alt="zip-tie-bundles" width="70%">
 
-4. **Testing the Switch:** Make sure the batteries are charged and insert them. Flip the switch and check if the Wi-Fi network appears or if the display lights up. If things aren't working, double-check connections.
+4. **测试开关：** 确保电池已充电并将其装入。拨动开关，检查 Wi-Fi 网络是否出现或显示屏是否亮起。如果无反应，请仔细检查连接。
 
 > [!NOTE]
-> **V2 Board Owners:** If you are using the V2 Distro board from a kit, there are instabilities with the battery system that prevent reliable battery usage. You must run your Sesame via USB-C (fast charger / laptop charger) for now. A free V3 Distro board will be provided to pre-order kit buyers!
+> **V2 板用户：** 如果您使用的是套件中的 V2 Distro 板，电池系统存在不稳定性，无法可靠使用电池。目前必须通过 USB-C（快充充电器/笔记本电脑充电器）运行您的 Sesame。预购套件购买者将免费获得 V3 Distro 板！
 
-5. **Top Cover:** Gently pack all the bundles in and slowly press the top cover down onto the electronic components. Be very gentle to avoid shorting or disconnecting anything.
-6. **Securing Top Cover:** Hold the whole robot together and insert the M2 self-threading screws into the bottom of the frame where they thread securely into the mounting holes for the top cover.
+5. **顶盖：** 小心地将所有线束收拢，缓慢地将顶盖向下压到电子元件上方。动作要非常轻柔，避免短路或断开任何连接。
+6. **固定顶盖：** 将整个机器人握在一起，从框架底部旋入 M2 自攻螺丝，使其牢固地拧入顶盖的安装孔中。
 
 <img src="assets/secure-top-cover.png" alt="secure-top-cover" width="70%">
 
-## Bottom Cover & Final Checks
+## 底盖与最终检查
 
 <img src="assets/insert-battery.png" alt="insert-battery" width="70%">
 
-1. Set the bottom cover in place, checking that no wires are trapped. Use the remaining two self-threading screws into the bottom to secure it.
+1. 将底盖放置到位，检查没有导线被夹住。使用剩余的两个自攻螺丝从底部旋入以固定底盖。
 
 <img src="assets/screw-on-bottom-cover.png" alt="screw-on-bottom-cover" width="70%">
 
-2. You can apply the included sticky pads to the feet if you like!
+2. 您可以根据喜好在脚部贴上随附的防滑垫！
 
-**Phase 4 checklist**
+**阶段 4 检查清单**
 
-- [ ] Motors mounted and screwed in on hip and leg joints.
-- [ ] Harness routed into channels, zip-tied without pinch points.
-- [ ] Top and bottom covers installed.
+- [ ] 电机已安装并用螺丝固定在髋关节和腿部关节上。
+- [ ] 线束已布入线槽，用扎带固定好，无夹点。
+- [ ] 顶盖和底盖已安装完毕。
 
 > [!TIP]
-> A common issue on battery power (if you upgrade) is that your Sesame robot will crash on movement. Setting the motor current delay higher in the settings may help, but upgrading to a Lithium Polymer (LiPo) cell often solves it for advanced users!
+> 电池供电时常见的问题是 Sesame 机器人在运动时崩溃。在设置中调高电机电流延迟可能有帮助，但对于高级用户来说，升级到锂聚合物（LiPo）电池通常能解决问题！
 
-Great job! The hardware is complete.
+做得好！硬件部分已全部完成。
 
 <img src="assets/sesame-done.png" alt="sesame-done" width="70%">
 
-## Final Checks and Flashing the Firmware
+## 最终检查和刷写固件
 
-Now we just need to do a few checks to make sure everything is working and we can flash the firmware onto the microcontroller.
+现在我们只需做一些检查，确保一切正常运作，然后就可以将固件刷入微控制器。
 
-**Sanity checks**
+**基本检查**
 
-1. Toggle the power switch (if you installed a battery) and confirm it fully disconnects the pack.
-2. Confirm the USB-C port is accessible for future firmware updates.
-3. Inspect the OLED wiring one last time to ensure SDA/SCL aren’t swapped.
+1. 拨动电源开关（如果您安装了电池），确认它能完全断开电池。
+2. 确认 USB-C 端口可触及，便于以后更新固件。
+3. 最后检查一次 OLED 接线，确保 SDA/SCL 没有接反。
 
-**Flash production firmware (For DIY / S2 Mini / Distro V1)**
-If you are using the V2 Build kit board, you can skip this step! It is pre-flashed.
+**刷写正式固件（适用于 DIY / S2 Mini / Distro V1）**
+如果您使用的是 V2 构建套件板，可以跳过此步！它已预刷固件。
 
-1. Choose the code variant from the firmware folder. Customize pin definitions if you're using a different ESP32.
-2. Use Arduino IDE to flash the full firmware bundle (motors + faces). Detailed notes live in [firmware/README.md](../../firmware/README.md).
-3. Connect to Sesame’s Wi-Fi AP, load the control page, and trigger a pose to verify everything moves as expected.
+1. 从固件文件夹中选择代码版本。如果您使用不同的 ESP32，请自定义引脚定义。
+2. 使用 Arduino IDE 刷写完整的固件包（电机 + 表情）。详细说明请参见 [firmware/README.md](../../firmware/README.md)。
+3. 连接到 Sesame 的 Wi-Fi AP，加载控制页面，触发一个姿态动作来验证一切运动如预期。
 
-That’s it. You’ve built Sesame! From here you can design new poses in [Sesame Studio](../../software/sesame-studio/README.md) or tweak the hardware per [hardware/README.md](../../hardware/README.md), or whatever you want!
+就这样，您已经成功构建了 Sesame！接下来您可以在 [Sesame Studio](../../software/sesame-studio/README.md) 中设计新的姿态，或根据 [hardware/README.md](../../hardware/README.md) 对硬件进行调整，随您发挥！

@@ -1,3 +1,3 @@
-# Images
+# 图片
 
-Photos, diagrams, and illustrations for documentation.
+文档所用的照片、图表和插图。

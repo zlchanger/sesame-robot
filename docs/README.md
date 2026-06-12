@@ -1,7 +1,7 @@
-# Documentation
+# 文档
 
-Documentation for the Sesame Robot project.
+Sesame Robot 项目文档。
 
-- **build-guide/** - Build guide with photos
-- **images/** - Photos and diagrams
-- **wiring-guide/** - Wiring instructions
+- **build-guide/** - 构建指南（含照片）
+- **images/** - 照片和图表
+- **wiring-guide/** - 接线说明

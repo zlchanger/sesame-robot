@@ -1,146 +1,146 @@
-# Wiring Guide
+# 接线指南
 
-Complete wiring guides for the Sesame Robot.
+Sesame Robot 的完整接线指南。
 
 ---
 
-## Choosing a Wiring Approach
+## 选择接线方案
 
-The project supports multiple wiring strategies that suit different build constraints:
+本项目支持多种接线策略，以适应不同的构建条件：
 
-- **Lolin S2 Mini / hand wiring (RECOMMENDED FOR DIY BUILDS):** Uses a Lolin S2 Mini, loose headers, and point-to-point wiring. It is the lowest-cost option, easy to source, supports USB-C PD for tethered power, but demands patience to keep the harness tidy and leaves less room for mistakes. **Critical: Use 30AWG wire for data lines and 22AWG for power—larger gauge wire will make assembly nearly impossible.**
-- **Sesame Distro Board V3 (INCLUDED IN NEW BUILD KITS):** The latest custom PCB with SMD components (V2 is also supported but legacy and limited to USB power due to battery brownouts), supports both USB-C PD and battery power. Pre-flashed and included with all Sesame Build Kits. Advanced to hand-solder; professional assembly recommended if ordering separately.
-- **Sesame Distro Board V1 / ESP32-DevKitC-32E (LEGACY):** Uses the custom Distro Board V1 PCB stacked on an ESP32-DevKitC-32E. Now phased out but still supported. V1 has known limitations and cannot run on tethered USB-C power (battery + buck converter required).
+- **Lolin S2 Mini / 手工接线（推荐 DIY 构建者使用）：** 使用 Lolin S2 Mini、排针和点对点接线。这是成本最低的方案，易于采购零件，支持 USB-C PD 有线供电，但需要耐心整理线束，且犯错空间较小。**关键提示：数据线使用 30AWG 导线，电源线使用 22AWG——更粗的导线将使组装几乎无法完成。**
+- **Sesame Distro Board V3（新构建套件中包含）：** 最新的定制 PCB，采用 SMD 元件（V2 也受支持但是旧版，因电池供电时电压骤降而仅限于 USB 供电），同时支持 USB-C PD 和电池供电。所有 Sesame 构建套件中均包含并已预刷固件。手工焊接难度高；如单独订购，建议使用专业组装服务。
+- **Sesame Distro Board V1 / ESP32-DevKitC-32E（旧版）：** 使用定制的 Distro Board V1 PCB 堆叠在 ESP32-DevKitC-32E 上。现已逐步淘汰但仍受支持。V1 存在已知限制，无法通过 USB-C 有线供电运行（需要使用电池 + 降压转换器）。
 
-Pick the approach that matches your component availability and comfort with managing wire bundles; the remainder of this guide dives into both workflows.
+选择与您零件可用性和接线管理能力相匹配的方案；本指南的其余部分将深入探讨各工作流程。
 
-## How to wire the Lolin S2 Mini / Hand Wiring
+## 如何为 Lolin S2 Mini / 手工接线进行接线
 
-The Lolin S2 Mini method is a traditional protoboard build. Consult the S2 Mini wiring diagram below while reading this section; it captures every motor, sensor, OLED, and button lead even if the photos only show a subset of the connections. Expect a high connection count, so plan wire lengths and colors before soldering to avoid confusion later.
+Lolin S2 Mini 方案是传统的万用板搭建方式。阅读本节时请参考下方的 S2 Mini 接线图；即使照片只显示了部分连接，图中也包含了每个电机、传感器、OLED 和按钮的连接。由于连接数量较多，请在焊接前规划好导线长度和颜色，避免后续混淆。
 
 <img src="s2-mini-wiring-guide-new.png" alt="S2 Mini wiring diagram" width="70%">
 
-*Credit to @captianeverypowersr on Discord for the new S2 mini guide.*
+*感谢 Discord 上的 @captianeverypowersr 提供新的 S2 mini 接线图。*
 
-### Prep
+### 准备工作
 
-1. **Secure and tin** all of the connections on the board before starting
-2. To connect all the 3-pin headers together and to the board, first attach them to a small section of protoboard
+1. **固定并镀锡**电路板上的所有连接点，然后再开始
+2. 要将所有 3 针排针连接在一起并连接到电路板，首先将它们固定在一小块万用板上
 
 <img src="assets/proto-headers.png" alt="proto-headers" width="70%">
 
-### Building Power and Ground Rails
+### 构建电源和地线导轨
 
-1. Solder one wire to one end of the pins, then guide it along and remove the insulation
-2. Solder this exposed wire to every middle pin (this creates the **5V rail**)
-3. Do the same for the ground lane (this creates the **ground rail**)
+1. 在排针的一端焊接一根导线，然后沿排针走向并去除绝缘层
+2. 将这根暴露的导线焊接到每个中间针脚上（这创建了 **5V 导轨**）
+3. 对地线排做同样的操作（这创建了**地线导轨**）
 
 <img src="assets/proto-power-rails.png" alt="proto-power-rails" width="70%">
 
-### Data Lines
+### 数据线
 
-You can now cut eight equal-length wires for data connections.
+现在您可以剪八根等长的导线用于数据连接。
 
-**Wire Recommendations:**
+**导线建议：**
 
-- **Data lines:** 30AWG silicone wire
-- **Power and ground:** 22AWG silicone wire
-- **Important:** Things will get super cluttered if you use large gauge wire
+- **数据线：** 30AWG 硅胶线
+- **电源和地线：** 22AWG 硅胶线
+- **重要提示：** 如果使用粗导线，布线会变得非常混乱
 
 <img src="assets/proto-datalines.png" alt="proto-data-lines" width="70%">
 
-Alongside the eight motor data leads, the diagram also calls out the OLED connections that branch from the microcontroller.
+除了八根电机数据线外，图中还标出了从微控制器引出的 OLED 连接。
 
-### Packing Electronics
+### 电子元件布设
 
-When packing electronics into the frame, it's difficult with the hand wiring setup because there are a lot of stray wires. My advice is to work slowly and methodically:
+手工接线方案中散线较多，将电子元件装入框架有一定难度。我的建议是缓慢而有条理地进行：
 
-1. Group wires with similar destinations
-2. Use zip ties and heat shrink tubing to make them as compact as possible
-3. Consider connecting the power switch after finishing most other wiring, since it's attached to the top cover
+1. 将去向相同的导线归为一组
+2. 使用扎带和热缩管使其尽可能紧凑
+3. 考虑在完成大部分其他接线后再连接电源开关，因为它安装在顶盖上
 
 <img src="assets/wire-managment.png" alt="wire-managment" width="70%">
 
-### Safety and Testing
+### 安全和测试
 
 > [!CAUTION]
-> Do not solder and de-solder connections with power connected!
+> 切勿在通电状态下焊接或解焊连接！
 
-**Before powering on:**
+**通电前：**
 
-- Double check your power and ground lines before turning the robot on
-- Make sure to cover any exposed wires as they can touch the pin headers and fry the ESP32 (especially when cramming the cover on)
+- 在开启机器人电源之前，仔细检查电源线和地线
+- 确保覆盖所有裸露的电线，因为它们可能碰到排针并烧毁 ESP32（特别是在压合顶盖时）
 
 > [!TIP]
-> To make fishing out the wires for the OLED display easier, you can temporarily twist them together into a group and then guide them through the opening in the top cover.
+> 为了方便引出 OLED 显示屏的导线，可以临时将它们拧成一组，然后通过顶盖上的开口引导过去。
 
 ---
 
-## How to wire the Sesame Distro Board V1 / ESP32-DevKitC-32E
+## 如何为 Sesame Distro Board V1 / ESP32-DevKitC-32E 进行接线
 
-### Overview
+### 概述
 
 > [!CAUTION]
-> UPDATE 1/20/26: Upon further testing, the Sesame distro board V1 will work, but it has a few issues that make it a little harder to assemble and will not run on teathered power (eg. USB C). Until V2 is released, I recommend using the S2 Mini / Hand Wiring approach. If you ordered a distro board V1, it will still be supported with wiring guides and firmware for the foreseeable future <3.
+> 2026年1月20日更新：经过进一步测试，Sesame distro board V1 可以工作，但存在一些问题，组装稍困难，且无法通过有线供电（如 USB-C）运行。在 V2 发布之前，我建议使用 S2 Mini / 手工接线方案。如果您订购了 distro board V1，在可预见的将来仍会有接线指南和固件支持<3。
 
-This option provides a cleaner, more organized wiring solution.
-Consult the distro-board wiring diagram below for exact connection locations.
+此方案提供了更整洁、更有条理的接线方案。
+请参考下方的 distro-board 接线图了解具体连接位置。
 
 > [!IMPORTANT]
-> **ESP32 Pin Header Requirement:** The distro board V1 stacks on top of the ESP32-DevKitC-32E, so you need an ESP32 board **without pre-soldered pin headers**. If your board came with headers already soldered on the top, you will need to desolder all of the headers and flip them to the bottom side of the ESP32 board so the distro board can mount on top.
+> **ESP32 排针要求：** Distro Board V1 堆叠在 ESP32-DevKitC-32E 上方，因此您需要一个**未预焊排针**的 ESP32 板。如果您的板子顶部已经焊接了排针，您需要将所有排针解焊并翻转到 ESP32 板的底部，以便 Distro Board 能够安装在上面。
 
 <img src="distro-board-wiring-guide.png" alt="distro-board wiring diagram" width="70%">
 
-### Component Installation
+### 元件安装
 
-**Optional components** (you can solder directly to pads instead):
+**可选元件**（您也可以直接焊接到焊盘上）：
 
-- 4-pin JST connector
-- 2-pin screw terminal
+- 4 针 JST 连接器
+- 2 针螺丝端子
 
-**Pin header installation tip:** If you're having difficulties keeping the pin headers in place to solder, try placing them in a protoboard first, then transferring them over.
+**排针安装技巧：** 如果难以将排针固定到位进行焊接，尝试先将它们放在万用板上，然后再转移过来。
 
-### Buck Converter Setup
+### 降压转换器设置
 
-A buck converter takes any voltage (5V-12V) and drops it to a stable 5V for the motors and ESP32.
+降压转换器接收任意电压（5V-12V）并将其降至稳定的 5V，为电机和 ESP32 供电。
 
-**If using a battery:**
+**如果使用电池：**
 
-1. Make sure to solder the buck converter enable pads
-2. The buck converter is **required** for battery operation
-3. A Bambu Lab 14500 7.4V 800mAh Li-ion Battery fits the latest internal frame perfectly. V3 requires soldering a XH2.54 pigtail directly to the board.
+1. 确保焊接降压转换器的使能焊盘
+2. 电池供电**必须**使用降压转换器
+3. Bambu Lab 14500 7.4V 800mAh 锂离子电池完美适配最新的内部框架。V3 需要将 XH2.54 尾线直接焊接到电路板上。
 
-**Alternative power options:**
+**替代电源选项：**
 
-- If you're using a benchtop supply or have another regulated 5V source
-- You can override the buck converter and take voltage directly from the screw terminal by soldering the override pads
+- 如果您使用台式电源或有其他稳压 5V 源
+- 可以通过焊接旁路焊盘来绕过降压转换器，直接从螺丝端子取电
 
-### Battery Connection
+### 电池连接
 
 > [!CAUTION]
-> If your battery has an XT30 or JST RCY connector, don't cut it off and wire the battery directly to the distro board! This is unsafe and means you can't charge your battery anymore.
+> 如果您的电池有 XT30 或 JST RCY 连接器，不要剪掉它并将电池直接接到分电板上！这样做不安全，而且意味着您无法再给电池充电。
 
-**Proper method:**
+**正确方法：**
 
-1. Get a female XT30 or JST RCY connector (matching your battery)
-2. Wire it to two wires that lead to the power terminal
-3. This allows you to safely connect and disconnect the battery
+1. 准备一个与电池匹配的母头 XT30 或 JST RCY 连接器
+2. 将其连接到两根通向电源端子的导线
+3. 这样您可以安全地连接和断开电池
 
-**Note on Battery Connectors:**
-- **Always remove the 10440 cells from the holder and recharge them separately using a proper Li-ion charger.** Most AAA holders do not support safe Li-ion charging and attempting to charge in-holder can be dangerous.
+**电池连接器注意事项：**
+- **务必将 10440 电池从电池仓中取出，使用合适的锂离子充电器单独充电。** 大多数 AAA 电池仓不支持安全的锂离子充电，尝试在仓内充电可能非常危险。
 
-### Sourcing the Distro Board
+### 获取分电板
 
-The Sesame Distro Board V1 is a custom PCB designed specifically for this project. It mounts on top of a ESP32-DevKitC-32E.
+Sesame Distro Board V1 是专为本项目设计的定制 PCB。它安装在 ESP32-DevKitC-32E 上方。
 
-More information is avalible in the [PCB](../../hardware/pcb/README.md) section of the documentation.
+更多信息请参见文档的 [PCB](../../hardware/pcb/README.md) 部分。
 
 ---
 
-## General Wiring Tips
+## 通用接线技巧
 
-- Work slowly and methodically
-- Test connections before applying power
-- Keep wire runs as short and neat as possible
-- Label wires if helpful for troubleshooting
-- Take photos during assembly for reference
+- 缓慢而有条理地进行工作
+- 通电前测试连接
+- 保持走线尽可能短且整洁
+- 如果有助于故障排查，可以给导线贴标签
+- 组装过程中拍照留作参考

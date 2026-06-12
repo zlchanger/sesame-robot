@@ -1,10 +1,10 @@
-# Top Cover Styles
+# 顶盖样式
 
 ## Enclosed v100
-Current modern version of sesame top cover, includes 5mm x 2mm magnet slots for hats! Front display wires are covered, supports multicolor details.
+当前 Sesame 顶盖的现代版本，包含用于安装帽子的 5mm × 2mm 磁铁槽！前面板显示屏走线被覆盖，支持多色细节。
 
 ## Cat v100
-Modern Version of the enclosed top cover with cat ears instead of stubby ears! Updated with all current features with magnet support for hats, and multicolor details.
+Enclosed 顶盖的现代版本，带有猫耳朵而非短耳朵！更新了所有当前功能，支持帽子磁铁和多色细节。
 
 ## No Ears v100
-Template for designing your own ears for Sesame. The areas right next to where the ears ussually go is a little thin so this version is only really meant for desiging ears onto. (Includes all previously mentioned features)
+用于自行设计 Sesame 耳朵的模板。耳朵通常所在位置旁边的区域较薄，因此此版本仅用于耳朵设计。（包含上述所有功能）
